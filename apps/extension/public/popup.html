@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SecureGuard</title>
+    <link rel="stylesheet" href="./popup.css">
+    <script src="./popup.js" defer></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <img class="logo" src="../icons/icon48.png" alt="">
+        <div>
+          <p class="eyebrow">BROWSER PROTECTION</p>
+          <h1>SecureGuard</h1>
+        </div>
+        <span id="protection-status" class="status" role="status">Loading</span>
+      </header>
+
+      <section class="site-card" aria-labelledby="site-heading">
+        <div class="site-icon" aria-hidden="true">◎</div>
+        <div class="site-copy">
+          <h2 id="site-heading">Current site</h2>
+          <p id="current-site">Checking active tab…</p>
+        </div>
+      </section>
+
+      <section class="summary" aria-label="Protection summary">
+        <div class="summary-card">
+          <span>Active alerts</span>
+          <strong id="alert-total">0</strong>
+        </div>
+        <div class="summary-card">
+          <span>Sites scanned</span>
+          <strong id="site-total">0</strong>
+        </div>
+      </section>
+
+      <section class="actions" aria-label="Log actions">
+        <button id="scan-page-button" type="button">Scan current page</button>
+        <button id="export-button" class="button-secondary" type="button">Export data</button>
+      </section>
+
+      <section class="settings" aria-label="Protection settings">
+        <label class="setting-row" for="protection-toggle">
+          <span>
+            <strong>Real-time scanning</strong>
+            <small>Inspect forms and outgoing requests</small>
+          </span>
+          <input id="protection-toggle" type="checkbox">
+        </label>
+        <label class="setting-row" for="notifications-toggle">
+          <span>
+            <strong>Security notifications</strong>
+            <small>Notify on high-risk detections</small>
+          </span>
+          <input id="notifications-toggle" type="checkbox">
+        </label>
+      </section>
+
+      <section class="activity" aria-labelledby="activity-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="activity-heading">Alert log</h2>
+            <p class="section-help">Expand an alert for details. Dismiss it to remove it from this log.</p>
+          </div>
+          <span id="activity-count" class="count">0</span>
+        </div>
+        <div class="log-actions">
+          <p id="empty-state" class="empty-state">No alerts recorded yet.</p>
+          <button id="clear-alerts-button" class="button-danger" type="button" hidden>Clear all</button>
+        </div>
+        <ul id="activity-list" class="activity-list"></ul>
+      </section>
+
+      <footer class="footer">
+        <span id="queue-status">Scan queue: 0 pending</span>
+        <button id="retry-button" type="button">Retry uploads</button>
+      </footer>
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Scan {
+  id        String   @id @default(uuid())
+  url       String
+  hostname  String
+  scanType  String
+  riskScore Int
+  severity  String
+  findings  Json
+  timestamp DateTime
+  createdAt DateTime @default(now())
+  alerts    Alert[]
+
+  @@index([hostname])
+  @@index([timestamp])
+  @@index([severity])
+}
+
+model Alert {
+  id        String   @id @default(uuid())
+  scanId    String?
+  type      String
+  severity  String
+  title     String
+  message   String
+  url       String
+  hostname  String
+  blocked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  scan Scan? @relation(fields: [scanId], references: [id], onDelete: SetNull)
+
+  @@index([hostname])
+  @@index([createdAt])
+  @@index([severity])
+}
+
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+model WhitelistEntry {
+  id        String   @id @default(uuid())
+  hostname  String   @unique
+  createdAt DateTime @default(now())
+}

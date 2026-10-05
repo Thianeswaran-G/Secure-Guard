@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: secureguard-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secureguard_dev
+      POSTGRES_DB: secureguard
+    ports:
+      - "5432:5432"
+    volumes:
+      - secureguard_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  secureguard_postgres_data:

@@ -1,0 +1,31 @@
+{
+  "name": "secureguard",
+  "private": true,
+  "version": "4.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build:shared && npm run build:apps",
+    "build:shared": "npm --workspace @secureguard/shared run build",
+    "build:apps": "npm --workspace @secureguard/api run build && npm --workspace @secureguard/extension run build && npm --workspace @secureguard/web run build",
+    "typecheck": "npm run typecheck:shared && npm run typecheck:apps",
+    "typecheck:shared": "npm --workspace @secureguard/shared run typecheck",
+    "typecheck:apps": "npm --workspace @secureguard/api run typecheck && npm --workspace @secureguard/extension run typecheck && npm --workspace @secureguard/web run typecheck",
+    "dev:web": "npm --workspace @secureguard/web run dev",
+    "dev:api": "npm --workspace @secureguard/api run start:dev",
+    "db:generate": "npm --workspace @secureguard/api exec prisma generate"
+  },
+  "dependencies": {
+    "@nestjs/config": "^4.0.4",
+    "@prisma/adapter-pg": "^7.10.0",
+    "@secureguard/shared": "*",
+    "dotenv": "^17.4.2",
+    "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "latest",
+    "typescript": "latest"
+  }
+}
